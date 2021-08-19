@@ -36,6 +36,7 @@
     <p class="p-4" id="typingZone"></p>
     <input class="p-2 pb-0 text-center border-b-2 focus:outline-none focus:border-b-2 focus:border-gray-800 focus:" id="inputField" type="text" />
     <h3 class="wpm" id="wpmResult"></h3>
+    <h3 class="wpm" id="accResult"></h3>
 </div>
 
 <script>
@@ -87,13 +88,12 @@
         errorCount = 0;
         seconds = 0;
         wpm = 0;
-        document.getElementById("wpmResult").innerHTML = "";
+        //document.getElementById("wpmResult").innerHTML = "";
     }
 
     function SetActiveWord() {
         if (allwords < (maxWords-1)) {
             allwords++;
-            wordCount++;
             activeWord = words.getElementsByTagName("span")[allwords];
             activeWord.classList.add("ActiveWord");
         } else {
@@ -101,8 +101,21 @@
             allwords++;
             testFinish = true;
             clockStarted = false;
-            wpm = Math.round((wordCount / seconds)*60);
-            document.getElementById("wpmResult").innerHTML = wpm + " WPM";
+
+            let wpmDisplay = document.getElementById("wpmResult");
+            let accDisplay = document.getElementById("accResult");
+            if (wordCount > 0) {
+                 //</br > (" + wordCount + " / " + seconds + " * " + 60 + ")
+                wpm = Math.round((wordCount / seconds) * 60);
+                acc = Math.abs((((wordCount - errorCount)) / allwords)*100);
+                wpmDisplay.innerHTML = wpm + " WPM";
+                accDisplay.innerHTML = acc + "% ACC";
+            } else {
+                wpmDisplay.innerHTML = 0 + " WPM";
+                accDisplay.innerHTML = 0 + "% ACC";
+            }
+
+            LoadTest();
         }
         }
 
@@ -113,6 +126,7 @@
             prev.classList.remove("activeWord");
             prev.classList.add("RightWord");
             inputField.value = "";
+            wordCount++;
             SetActiveWord();
         } else if(inputField.value.trim() != "") {
             let prev = activeWord;

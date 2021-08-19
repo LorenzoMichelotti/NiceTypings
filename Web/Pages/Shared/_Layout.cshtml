@@ -9,8 +9,8 @@
     <link href="https://unpkg.com/tailwindcss@@^2/dist/tailwind.min.css" rel="stylesheet">
 
 </head>
-<body>
-    <header>
+<body class="flex flex-col justify-center h-screen items-center">
+    @*<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Web</a>
@@ -30,16 +30,16 @@
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
+    </header>*@
+    <div class="container mt-48 flex-grow">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top text-center h-10 footer text-muted">
         <div class="container">
-            &copy; 2021 - Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2021 - NiceTypings - by <a class="text-blue-500" href="https://www.linkedin.com/in/lorenzo-michelotti-b1b4441a7">Lorenzo Michelotti</a>
         </div>
     </footer>
 
